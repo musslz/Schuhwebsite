@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rare Sneakers.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-overlay: rgba(18, 18, 18, 0.4);
+    --surface: rgba(255, 252, 248, 0.96);
+    --surface-border: rgba(0, 0, 0, 0.08);
+    --text: #1a1a1a;
+    --text-soft: #4a4a4a;
+    --accent: #1a1a1a;
+}
+
+body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: url("https://i.postimg.cc/h469tJW6/2b406bceef8cbbbda046bf538c391636.jpg") no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed;
+    color: var(--text);
+    min-height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--bg-overlay);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* HEADER */
+header {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    border-bottom: 1px solid var(--surface-border);
+    background: rgba(255, 252, 248, 0.6);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--text);
+    padding: 10px 0;
+}
+
+.cart {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    padding: 10px 18px;
+    border: 1px solid var(--surface-border);
+    border-radius: 100px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.cart:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* HERO SECTION */
+.hero {
+    position: relative;
+    z-index: 1;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 48px 80px;
+}
+
+.hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.04em;
+    margin-bottom: 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* GRID */
+.container {
+    position: relative;
+    z-index: 1;
+    padding: 0 48px 80px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 48px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.product {
+    cursor: pointer;
+}
+
+.product img {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    object-position: center;
+    background: rgba(255, 252, 248, 0.5);
+    border-radius: 4px;
+    transition: transform 0.35s ease;
+}
+
+.product:hover img {
+    transform: scale(1.02);
+}
+
+.product-info {
+    margin-top: 22px;
+    padding: 0;
+}
+
+.product-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1.35;
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.product-price {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 8px;
+    letter-spacing: 0.08em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.distribution-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+}
+
+/* DETAIL PAGE */
+#detailPage {
+    display: none;
+    position: relative;
+    z-index: 1;
+    padding: 48px;
+}
+
+.detail-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.detail-wrapper img {
+    width: 100%;
+    height: 560px;
+    object-fit: contain;
+    object-position: center;
+    background: rgba(255, 252, 248, 0.5);
+    border-radius: 4px;
+}
+
+.detail-info {
+    background: var(--surface);
+    padding: 44px 48px;
+    border-radius: 4px;
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.06);
+}
+
+.detail-info h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.25;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+}
+
+.detail-info p {
+    margin-bottom: 12px;
+    color: var(--text-soft);
+    line-height: 1.65;
+    font-size: 14px;
+}
+
+.detail-info .distribution-badge {
+    margin-bottom: 16px;
+}
+
+button {
+    margin-top: 28px;
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, color 0.2s;
+}
+
+button:hover {
+    background: var(--accent);
+    color: #fff;
+}
+
+.back {
+    margin-bottom: 32px;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: #fff;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    transition: background 0.2s, border-color 0.2s;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.back:hover {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* CART PAGE */
+#cartPage {
+    display: none;
+    position: relative;
+    z-index: 1;
+    padding: 48px 48px 80px;
+    min-height: 60vh;
+}
+
+.cart-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--surface);
+    border-radius: 8px;
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+    padding: 48px 56px 56px;
+}
+
+.cart-page-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    color: var(--text);
+    letter-spacing: 0.04em;
+}
+
+.cart-items {
+    width: 100%;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--surface-border);
+}
+
+.cart-item:last-of-type {
+    border-bottom: none;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.cart-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cart-item-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+}
+
+.cart-item-price {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-soft);
+    letter-spacing: 0.04em;
+}
+
+.cart-remove {
+    padding: 10px 20px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text-soft);
+    border: 1px solid var(--surface-border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    flex-shrink: 0;
+}
+
+.cart-remove:hover {
+    border-color: var(--text);
+    color: var(--text);
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.cart-total-wrap {
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--surface-border);
+}
+
+.cart-total {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: 0.02em;
+}
+
+.cart-empty {
+    color: var(--text-soft);
+    font-size: 16px;
+    line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Rare Sneakers</div>
+    <div class="cart" id="cartCount" onclick="openCart()">Cart (0)</div>
+</header>
+
+<!-- HOME -->
+<div id="homePage">
+    <div class="hero">
+        <h1 class="hero-title">Rare Sneakers.com</h1>
+        <p class="hero-subtitle">Designed by Paul</p>
+    </div>
+    <div class="container">
+        <div class="grid" id="productGrid"></div>
+    </div>
+</div>
+
+<!-- DETAIL -->
+<div id="detailPage">
+    <div class="back" onclick="goHome()">← Back</div>
+    <div id="detailContent"></div>
+</div>
+
+<!-- CART -->
+<div id="cartPage">
+    <div class="back" onclick="goHome()">← Back</div>
+    <div class="cart-wrapper">
+        <div class="cart-page-title">Your Cart</div>
+        <div id="cartContent" class="cart-items"></div>
+        <div class="cart-total-wrap"><div id="cartTotal" class="cart-total"></div></div>
+    </div>
+</div>
+
+<script>
+
+let cart = [];
+
+const products = [
+{
+    id: 1,
+    brand: "Maison Margiela",
+    title: "gats High Top",
+    price: 450,
+    image: "https://i.postimg.cc/NjJCs6YK/schwarz-leder-replica-maison-martin-margiela-sneakers-11941333-1-1-removebg-preview.png",
+    size: "45",
+    material: "Leather",
+    description: "Rare archive Maison Margiela gats High Top in good condition.",
+},
+{
+    id: 2,
+    brand: "Balenciaga",
+    title: "Leather High Top",
+    price: 500,
+    image: "https://i.postimg.cc/ZKqrT1q2/56340233-1-2-removebg-preview.png",
+    size: "42",
+    material: "Leather",
+    description: "very rare Balenciaga Leather High Top in good condition."
+
+}, 
+{
+    id: 3,
+    brand: "Maison Margiela",
+    title: "Future High Top (gold)",
+    price: 1500,
+    image: "https://i.postimg.cc/SKHZ8mn8/89155ad0e70a4d699f61231aaf577eef-removebg-preview.png",
+    size: "45",
+    material: "Leather",
+    description: "very rare Maison Margiela Future High Top in good condition."
+},
+{
+    id: 4,
+    brand: "Givenchy",
+    title: "Tyson",
+    price: 550,
+    image: "https://i.postimg.cc/nrrCJf1K/weiss-leder-tyson-givenchy-sneakers-61927687-1-2-removebg-preview.png",
+    size: "43",
+    material: "Textile/Leather",
+    description: "rare Givenchy Tyson in good condition."
+}
+];
+
+function renderHome() {
+    document.getElementById("homePage").style.display = "block";
+    document.getElementById("detailPage").style.display = "none";
+    document.getElementById("cartPage").style.display = "none";
+
+    const grid = document.getElementById("productGrid");
+    grid.innerHTML = "";
+
+    products.forEach(p => {
+        grid.innerHTML += `
+            <div class="product" onclick="openProduct(${p.id})">
+                <img src="${p.image}">
+                <div class="product-info">
+                    <div class="product-title">${p.brand} ${p.title}</div>
+                    <div class="product-price">${p.price} €</div>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function openProduct(id) {
+    const p = products.find(prod => prod.id === id);
+
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("detailPage").style.display = "block";
+    document.getElementById("cartPage").style.display = "none";
+
+    document.getElementById("detailContent").innerHTML = `
+        <div class="detail-wrapper">
+            <img src="${p.image}">
+            <div class="detail-info">
+                <div class="distribution-badge">Distribution</div>
+                <h2>${p.brand} ${p.title}</h2>
+                <p><strong>Size:</strong> ${p.size}</p>
+                <p><strong>Material:</strong> ${p.material}</p>
+                <p>${p.description}</p>
+                <p><strong>${p.price} €</strong></p>
+                <button onclick="addToCart(${p.id})">Add to Cart</button>
+            </div>
+        </div>
+    `;
+}
+
+function addToCart(productId) {
+    const p = products.find(prod => prod.id === productId);
+    if (p) cart.push(p);
+    updateCartCount();
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    renderCart();
+    updateCartCount();
+}
+
+function updateCartCount() {
+    document.getElementById("cartCount").innerText = `Cart (${cart.length})`;
+}
+
+function openCart() {
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("detailPage").style.display = "none";
+    document.getElementById("cartPage").style.display = "block";
+    renderCart();
+}
+
+function renderCart() {
+    const el = document.getElementById("cartContent");
+    const totalEl = document.getElementById("cartTotal");
+
+    if (cart.length === 0) {
+        el.innerHTML = '<div class="cart-empty">Your cart is empty.</div>';
+        totalEl.textContent = '';
+        return;
+    }
+
+    let total = 0;
+    el.innerHTML = cart.map((item, i) => {
+        total += item.price;
+        return `
+            <div class="cart-item">
+                <img src="${item.image}" alt="">
+                <div class="cart-item-info">
+                    <div class="cart-item-title">${item.brand} ${item.title}</div>
+                    <div class="cart-item-price">${item.price} €</div>
+                </div>
+                <button class="cart-remove" onclick="removeFromCart(${i})">Remove</button>
+            </div>
+        `;
+    }).join('');
+
+    totalEl.textContent = `Total: ${total} €`;
+}
+
+function goHome() {
+    renderHome();
+}
+
+renderHome();
+
+</script>
+
+</body>
+</html>
